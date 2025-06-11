@@ -15,9 +15,9 @@
     --color-btn-hover-bg: rgba(100, 255, 218, 1);
     --color-btn-hover-text: rgba(0, 0, 0, 1);
 
-    --card-bg-dark: rgba(0, 0, 0, 1);
+    --card-bg-dark: rgba(0, 0, 0, 0.6);
     --card-border-dark: rgba(0, 0, 0, 1);
-    --card-bg-light: rgba(255, 255, 255, 1);
+    --card-bg-light: rgba(255, 255, 255, 0.6);
     --card-border-light: rgba(255, 255, 255, 1);
 }
 
