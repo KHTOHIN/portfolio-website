@@ -105,10 +105,13 @@ body.light-theme h2 {
     border-radius: 15px;
     margin-right: 20px;
     height: fit-content;
+    max-height: calc(100vh - 40px); /* Adjust as needed based on top offset */
+    overflow-y: auto;
     position: sticky;
     top: 20px;
     color: var(--color-text-light);
 }
+
 
 .main-content {
     flex: 3;
