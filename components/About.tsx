@@ -3,6 +3,7 @@ import { Section } from './ui/Section';
 import { ABOUT } from '../constants';
 import { CheckCircle } from 'lucide-react';
 import { useTheme } from '../ThemeContext';
+import myPic from '../assets/my_pic.jpg';
 
 export const About: React.FC = () => {
   const { isDark } = useTheme();
@@ -13,8 +14,8 @@ export const About: React.FC = () => {
         <div className="md:col-span-5 relative">
           <div className={`aspect-[4/5] rounded-2xl overflow-hidden shadow-xl relative z-10 ${isDark ? 'bg-slate-700' : 'bg-slate-200'}`}>
              <img 
-               src="/my_pic.jpg" 
-               alt="Kawsar Hamid" 
+               src={myPic} 
+               alt="Kawsar Hamid"
                className="w-full h-full object-cover hover:scale-105 transition-all duration-500"
              />
           </div>
