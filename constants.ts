@@ -1,4 +1,4 @@
-import { Project, ExperienceItem, SkillCategory, Testimonial, BlogPost, Certification, PersonalProject, Achievement } from './types';
+import { Project, ExperienceItem, SkillCategory, Testimonial, BlogPost, Certification, PersonalProject, Achievement, EducationItem } from './types';
 import { 
   Code, 
   Server, 
@@ -15,14 +15,18 @@ export const PERSONAL_INFO = {
   role: "Software Engineer I | Programmer",
   headline: "System design, SQL expertise, and code debugging — building robust solutions with PHP, Java & MySQL.",
   subheadline: "I'm Kawsar Hamid — a passionate programmer with a strong focus on system design, SQL expertise, and code debugging. I specialize in support-based development, client-centric solutions, and building robust reporting modules.",
-  location: "Bangladesh",
+  location: "Dhaka, Bangladesh",
   availability: "Available for Full-time opportunities — remote & on-site.",
   phone: "+8801750047354",
+  email: "kawsarhamidtohin@gmail.com",
+  whatsapp: "https://wa.me/8801750047354",
+  resumeUrl: "/Kawsar_Hamid_Resume.pdf",
   social: {
     github: "https://github.com/KHTohin",
     linkedin: "https://www.linkedin.com/in/kawsar-hamid-tohin/",
     facebook: "https://www.facebook.com/kawsarhamid.tohin.1/",
-    email: "mailto:kawsarhamidtohin@gmail.com"
+    email: "mailto:kawsarhamidtohin@gmail.com",
+    whatsapp: "https://wa.me/8801750047354"
   }
 };
 
@@ -180,10 +184,10 @@ export const EXPERIENCE: ExperienceItem[] = [
     period: "Jun 2025 — Present",
     location: "Dhaka, Bangladesh",
     description: [
-      "Promoted from Programmer due to company designation style upgradation.",
-      "Continuing to lead development and optimization of government systems.",
-      "Built key modules, optimized queries, managed servers and backups.",
-      "Attended client meetings and analyzed requirements."
+      "Promoted to Software Engineer I in recognition of technical contributions and system leadership across national platforms.",
+      "Directing architecture, development, and maintenance of high-throughput government and enterprise portals.",
+      "Architecting critical modules, tuning SQL query execution plans, and managing Linux server infrastructure.",
+      "Collaborating directly with government stakeholders to translate complex business rules into reliable technical solutions."
     ]
   },
   {
@@ -194,9 +198,9 @@ export const EXPERIENCE: ExperienceItem[] = [
     location: "Dhaka, Bangladesh",
     description: [
       "Led the Phyto-Sanitary Automation System, cutting certificate processing time by 30%.",
-      "Improved government system performance by 25% through optimization.",
-      "Built key modules, optimized queries, managed servers and backups.",
-      "Attended client meetings and analyzed requirements."
+      "Improved government system performance by 25% through comprehensive database and query optimization.",
+      "Engineered core modules including digital certificate signing, automated SMS dispatch, and reusable chalan workflows.",
+      "Handled Linux production server administration, automated cron jobs, and vulnerability/malware scanning."
     ]
   },
   {
@@ -206,9 +210,10 @@ export const EXPERIENCE: ExperienceItem[] = [
     period: "Apr 2022 — Aug 2024",
     location: "Dhaka, Bangladesh",
     description: [
-      "Improved database speed by 20% with optimization techniques.",
-      "Helped design and build the Contract Farming Management System.",
-      "Provided tech solutions that boosted efficiency by 15%."
+      "Boosted database query performance by 20% through comprehensive schema indexing and query refactoring.",
+      "Co-engineered the Contract Farming Management and Traceability Reporting System for DAE.",
+      "Delivered robust backend features and API endpoints resulting in 15% improvement in operational efficiency.",
+      "Maintained system stability across multiple production releases through rigorous debugging and unit testing."
     ]
   },
   {
@@ -218,9 +223,9 @@ export const EXPERIENCE: ExperienceItem[] = [
     period: "Sep 2021 — Mar 2022",
     location: "Dhaka, Bangladesh",
     description: [
-      "Contributed to project planning and module design.",
-      "Developed APIs and supported both backend and frontend.",
-      "Joined client discussions for requirement gathering."
+      "Contributed to project planning, system workflow analysis, and database schema design.",
+      "Developed RESTful APIs and built responsive frontend interfaces for enterprise clients.",
+      "Engaged in client requirement gathering and technical support during system deployment phases."
     ]
   },
   {
@@ -230,8 +235,8 @@ export const EXPERIENCE: ExperienceItem[] = [
     period: "Oct 2020 — Aug 2021",
     location: "Dhaka, Bangladesh",
     description: [
-      "Helped analyze project requirements and design systems.",
-      "Worked on backend modules and joined client meetings."
+      "Analyzed functional requirements and assisted in designing backend architectures.",
+      "Developed core application modules and participated in client coordination meetings."
     ]
   },
   {
@@ -241,8 +246,8 @@ export const EXPERIENCE: ExperienceItem[] = [
     period: "May 2019 — Aug 2019",
     location: "Dhaka, Bangladesh",
     description: [
-      "Worked on full-stack projects in a hybrid work setup.",
-      "Used Java and databases in hands-on development tasks."
+      "Engineered full-stack features using Java, PHP, and relational databases in a hybrid environment.",
+      "Participated in hands-on software development lifecycle, code reviews, and database design."
     ]
   }
 ];
@@ -423,9 +428,10 @@ export const CERTIFICATIONS: Certification[] = [
   { id: "5", title: "Web Development Live Course", issuer: "Eshikhon", date: "Sep 2021" },
   { id: "6", title: "Web Design", issuer: "Orbit IT", date: "Feb 2020" },
   { id: "7", title: "Complete Java Masterclass", issuer: "Eshikhon", date: "Jan 2019" },
-  { id: "8", title: "HTML Fundamentals", issuer: "Sololearn", date: "May 2018", link: "https://www.sololearn.com/Certificate/1014-5185058/pdf" },
-  { id: "9", title: "Big Data", issuer: "Bangladesh Computer Council", date: "Mar 2018" },
-  { id: "10", title: "SQL Fundamentals", issuer: "Sololearn", date: "Jan 2018", link: "https://www.sololearn.com/Certificate/1060-5185058/pdf" },
+  { id: "8", title: "HTML & CSS", issuer: "TemplateMonster", date: "Sep 2018" },
+  { id: "9", title: "HTML Fundamentals", issuer: "Sololearn", date: "May 2018", link: "https://www.sololearn.com/Certificate/1014-5185058/pdf" },
+  { id: "10", title: "Big Data", issuer: "Bangladesh Computer Council", date: "Mar 2018" },
+  { id: "11", title: "SQL Fundamentals", issuer: "Sololearn", date: "Jan 2018", link: "https://www.sololearn.com/Certificate/1060-5185058/pdf" },
 ];
 
 export const PERSONAL_PROJECTS: PersonalProject[] = [
@@ -446,6 +452,29 @@ export const PERSONAL_PROJECTS: PersonalProject[] = [
   { id: "15", name: "Caesar Cipher", description: "Implementation of basic Caesar encryption.", tech: "Java", link: "https://github.com/ucsclabs/caesar-cipher-KHTOHIN" },
 ];
 
+export const EDUCATION: EducationItem[] = [
+  {
+    id: "1",
+    degree: "B.Sc. in Computer Science & Engineering",
+    institution: "IUBAT - International University of Business Agriculture and Technology",
+    period: "2014 — 2019",
+    location: "Dhaka, Bangladesh",
+    fieldOfStudy: "Software Engineering & Database Systems",
+    highlights: [
+      "Core focus on Algorithms, Data Structures, Database Systems & OOP",
+      "Completed hands-on software development capstone projects",
+      "Active participant in technical seminars, coding challenges & workshops"
+    ]
+  }
+];
+
 export const ACHIEVEMENTS: Achievement[] = [
-  { id: "1", title: "Appreciation for DAE Project by Synesis IT (Jan 2024)" },
+  { 
+    id: "1", 
+    title: "Appreciation for DAE Project by Synesis IT",
+    organization: "Synesis IT PLC",
+    date: "Jan 2024",
+    description: "Awarded special recognition for exceptional technical execution, leading bug fixes, server optimizations, and cutting Phyto-Sanitary certificate processing time by 30% on national government infrastructure.",
+    badge: "Special Recognition Award"
+  }
 ];

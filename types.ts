@@ -57,8 +57,23 @@ export interface PersonalProject {
   link: string;
 }
 
+export interface EducationItem {
+  id: string;
+  degree: string;
+  institution: string;
+  period: string;
+  location: string;
+  grade?: string;
+  highlights?: string[];
+  fieldOfStudy?: string;
+}
+
 export interface Achievement {
   id: string;
   title: string;
+  organization?: string;
+  date?: string;
+  description?: string;
+  badge?: string;
   link?: string;
 }

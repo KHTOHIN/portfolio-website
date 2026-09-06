@@ -1,55 +1,73 @@
 import React from 'react';
-import { Section } from './ui/Section';
 import { EXPERIENCE } from '../constants';
-import { Calendar, MapPin } from 'lucide-react';
 import { useTheme } from '../ThemeContext';
 
 export const Experience: React.FC = () => {
   const { isDark } = useTheme();
 
   return (
-    <Section id="experience" className={isDark ? 'bg-slate-800' : 'bg-slate-50'}>
-      <div className="max-w-3xl mx-auto">
-        <h2 className={`text-3xl md:text-4xl font-bold mb-12 text-center ${isDark ? 'text-white' : 'text-slate-900'}`}>Work Experience</h2>
-        
-        <div className="space-y-12">
+    <section id="experience" className={`py-20 md:py-32 relative transition-colors duration-300 ${isDark ? 'bg-cyber-darker' : 'bg-slate-50'}`}>
+      {/* Background Grid */}
+      <div className={`absolute inset-0 pointer-events-none opacity-20 ${isDark ? 'bg-grid-pattern-dark' : 'bg-grid-pattern-light'}`} />
+
+      <div className="container mx-auto px-6 md:px-8 max-w-7xl relative z-10">
+        {/* Echo Title */}
+        <div className="relative mb-16">
+          <h2 className={`text-5xl md:text-6xl font-black font-mono tracking-tight ${isDark ? 'text-cyber-accent' : 'text-light-accent'}`}>
+            Experience
+          </h2>
+          <h2 className={`text-5xl md:text-6xl font-black font-mono absolute top-1 left-0 opacity-20 select-none pointer-events-none ${isDark ? 'text-cyber-accent' : 'text-light-accent'}`}>
+            Experience
+          </h2>
+          <p className={`mt-3 font-mono text-xs uppercase tracking-widest ${
+            isDark ? 'text-cyber-text/70' : 'text-light-text/70'
+          }`}>
+            // 5+ Years of Engineering Production Systems & National-Scale Applications
+          </p>
+        </div>
+
+        <div className="max-w-3xl mx-auto space-y-12">
           {EXPERIENCE.map((job, index) => (
-            <div key={job.id} className="relative pl-8 md:pl-0">
-              {index !== EXPERIENCE.length - 1 && (
-                <div className={`hidden md:block absolute left-[50%] top-16 bottom-[-48px] w-px -translate-x-1/2 ${isDark ? 'bg-slate-600' : 'bg-slate-200'}`}></div>
-              )}
-              
-              <div className={`md:flex items-start justify-between gap-10 ${index % 2 === 0 ? 'md:flex-row-reverse' : ''}`}>
-                <div className={`absolute left-0 md:left-1/2 w-4 h-4 rounded-full bg-blue-600 border-4 shadow-sm -translate-x-1.5 md:-translate-x-1/2 mt-1.5 ${isDark ? 'border-slate-800' : 'border-white'}`}></div>
+            <div 
+              key={job.id} 
+              className={`border-l-2 pl-8 transition-colors duration-300 relative group ${
+                isDark ? 'border-cyber-border hover:border-cyber-accent' : 'border-light-border hover:border-light-accent'
+              }`}
+            >
+              <span className={`font-mono text-xs ${isDark ? 'text-cyber-text/40' : 'text-light-text/40'}`}>
+                {String(index + 1).padStart(2, '0')}
+              </span>
 
-                <div className="md:w-1/2 mb-2 md:mb-0">
-                   <div className={`flex flex-col ${index % 2 === 0 ? 'md:items-start' : 'md:items-end'} mb-1`}>
-                     <span className="inline-flex items-center text-sm font-semibold text-blue-600 mb-1">
-                        <Calendar className="w-3 h-3 mr-1" /> {job.period}
-                     </span>
-                     <h3 className={`text-lg font-bold ${isDark ? 'text-white' : 'text-slate-900'}`}>{job.role}</h3>
-                     <h4 className={`text-md font-medium ${isDark ? 'text-slate-300' : 'text-slate-700'}`}>{job.company}</h4>
-                     <span className={`inline-flex items-center text-xs mt-1 ${isDark ? 'text-slate-500' : 'text-slate-500'}`}>
-                        <MapPin className="w-3 h-3 mr-1" /> {job.location}
-                     </span>
-                   </div>
-                </div>
+              <h3 className={`font-mono font-bold text-lg mt-1 transition-colors ${
+                isDark ? 'text-cyber-heading group-hover:text-cyber-accent' : 'text-light-heading group-hover:text-light-accent'
+              }`}>
+                {job.role}
+              </h3>
 
-                <div className={`md:w-1/2 p-6 rounded-xl shadow-sm border ${isDark ? 'bg-slate-900 border-slate-700' : 'bg-white border-slate-100'}`}>
-                  <ul className="space-y-3">
-                    {job.description.map((desc, i) => (
-                      <li key={i} className={`text-sm leading-relaxed flex items-start ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
-                        <span className="mr-2 text-blue-400 mt-1.5">•</span>
-                        <span>{desc}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+              <div className="flex flex-wrap items-center gap-3 mt-1">
+                <span className={`font-mono text-sm font-medium ${isDark ? 'text-cyber-heading/80' : 'text-light-heading/80'}`}>
+                  {job.company}
+                </span>
+                <span className={`font-mono text-xs font-semibold ${isDark ? 'text-cyber-accent' : 'text-light-accent'}`}>
+                  {job.period}
+                </span>
               </div>
+
+              <span className={`font-mono text-xs block mt-1 ${isDark ? 'text-cyber-text/50' : 'text-light-text/50'}`}>
+                {job.location}
+              </span>
+
+              <ul className="mt-3 space-y-1.5">
+                {job.description.map((desc, i) => (
+                  <li key={i} className={`font-mono text-xs uppercase leading-relaxed tracking-wide ${isDark ? 'text-cyber-text/70' : 'text-light-text/70'}`}>
+                    • {desc}
+                  </li>
+                ))}
+              </ul>
             </div>
           ))}
         </div>
       </div>
-    </Section>
+    </section>
   );
 };
