@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<!--
+  Source for public/og-image.png (1200x630 link-preview card). Regenerate after editing:
+  "C:\Program Files\Google\Chrome\Application\chrome.exe" --headless=new --hide-scrollbars --window-size=1200,630 --virtual-time-budget=8000 --screenshot=public\og-image.png scripts\og-image.html
+-->
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>OG image</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=JetBrains+Mono:wght@500;700;800&display=block" rel="stylesheet" />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { width: 1200px; height: 630px; overflow: hidden; }
+    body {
+      background:
+        radial-gradient(circle at 18% 30%, rgba(0, 240, 255, 0.14), transparent 45%),
+        radial-gradient(circle at 85% 85%, rgba(37, 99, 235, 0.16), transparent 45%),
+        #0a0e1a;
+      color: #f1f5f9;
+      font-family: 'Inter', sans-serif;
+      position: relative;
+    }
+    .grid {
+      position: absolute; inset: 0;
+      background-size: 40px 40px;
+      background-image:
+        linear-gradient(to right, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+    }
+    .frame {
+      position: absolute; inset: 36px;
+      border: 1px solid #1a2340; border-radius: 28px;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 56px 64px;
+      background: rgba(15, 21, 37, 0.55);
+    }
+    .accent-bar { position: absolute; left: 0; top: 64px; bottom: 64px; width: 6px; border-radius: 0 6px 6px 0; background: #00f0ff; }
+    .content { max-width: 720px; }
+    .url { font-family: 'JetBrains Mono', monospace; font-size: 22px; color: #00f0ff; opacity: 0.85; font-weight: 500; }
+    h1 { font-family: 'JetBrains Mono', monospace; font-weight: 800; font-size: 84px; line-height: 1; letter-spacing: -2px; margin-top: 22px; }
+    .role { font-family: 'JetBrains Mono', monospace; font-weight: 700; font-size: 34px; color: #00f0ff; margin-top: 20px; text-shadow: 0 0 30px rgba(0, 240, 255, 0.35); }
+    .pills { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 34px; }
+    .pill {
+      font-family: 'JetBrains Mono', monospace; font-size: 21px; font-weight: 500;
+      padding: 8px 16px; border-radius: 12px; border: 1px solid #2d3b66; background: #0f1525; color: #f1f5f9;
+    }
+    .meta { margin-top: 34px; font-size: 23px; color: #94a3b8; font-weight: 400; }
+    .meta strong { color: #f1f5f9; font-weight: 600; }
+    .photo {
+      width: 290px; height: 360px; border-radius: 22px; overflow: hidden; flex-shrink: 0;
+      border: 3px solid rgba(0, 240, 255, 0.6);
+      box-shadow: 0 0 60px rgba(0, 240, 255, 0.25);
+    }
+    .photo img { width: 100%; height: 100%; object-fit: cover; object-position: center; }
+  </style>
+</head>
+<body>
+  <div class="grid"></div>
+  <div class="frame">
+    <div class="accent-bar"></div>
+    <div class="content">
+      <div class="url">&gt; kawsarhamid.vercel.app</div>
+      <h1>Kawsar Hamid</h1>
+      <div class="role">Software Engineer II — Backend</div>
+      <div class="pills">
+        <span class="pill">PHP / Laravel</span>
+        <span class="pill">Java / Spring Boot</span>
+        <span class="pill">Oracle</span>
+        <span class="pill">REST API</span>
+        <span class="pill">Linux</span>
+      </div>
+      <div class="meta"><strong>Synesis IT PLC</strong> · Dhaka, Bangladesh · Gov &amp; Enterprise Systems</div>
+    </div>
+    <div class="photo"><img src="../assets/my_pic.jpg" alt="" /></div>
+  </div>
+</body>
+</html>

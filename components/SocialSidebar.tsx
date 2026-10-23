@@ -1,6 +1,6 @@
 import React from 'react';
 import { Github, Linkedin, Facebook, Mail, MessageSquare } from 'lucide-react';
-import { PERSONAL_INFO } from '../constants';
+import { PERSONAL_INFO } from '../data/profile';
 import { useTheme } from '../ThemeContext';
 
 export const SocialSidebar: React.FC = () => {

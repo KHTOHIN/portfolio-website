@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { SKILLS } from '../constants';
+import { SKILLS } from '../data/profile';
 import { useTheme } from '../ThemeContext';
+import { EchoTitle } from './ui/EchoTitle';
 import { Code2, Layers, Database, Terminal, Cpu, Search, Sparkles, CheckCircle2 } from 'lucide-react';
 
 export const Skills: React.FC = () => {
@@ -46,25 +47,10 @@ export const Skills: React.FC = () => {
       <div className="container mx-auto px-6 md:px-8 max-w-7xl relative z-10">
         {/* Echo Title */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
-          <div>
-            <div className="relative">
-              <h2 className={`text-5xl md:text-6xl font-black font-mono tracking-tight ${
-                isDark ? 'text-cyber-accent' : 'text-light-accent'
-              }`}>
-                Skills
-              </h2>
-              <h2 className={`text-5xl md:text-6xl font-black font-mono absolute top-1 left-0 opacity-20 select-none pointer-events-none ${
-                isDark ? 'text-cyber-accent' : 'text-light-accent'
-              }`}>
-                Skills
-              </h2>
-            </div>
-            <p className={`mt-3 font-mono text-xs uppercase tracking-widest ${
-              isDark ? 'text-cyber-text/70' : 'text-light-text/70'
-            }`}>
-              // Core Technical Matrix & Architecture Competencies ({totalSkillCount} Key Technologies)
-            </p>
-          </div>
+          <EchoTitle
+            title="Skills"
+            subtitle={`// Core Technical Matrix & Architecture Competencies (${totalSkillCount} Key Technologies)`}
+          />
 
           {/* Quick Search */}
           <div className="relative w-full md:w-72">
@@ -103,14 +89,14 @@ export const Skills: React.FC = () => {
         </div>
 
         {/* Skills Cards Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredCategories.map((category) => {
             const IconComponent = categoryIcons[category.title] || Code2;
 
             return (
               <div
                 key={category.title}
-                className={`p-6 rounded-2xl border transition-all duration-300 hover:-translate-y-1 group flex flex-col justify-between ${
+                className={`min-w-0 p-6 rounded-2xl border transition-all duration-300 hover:-translate-y-1 group flex flex-col justify-between ${
                   isDark 
                     ? 'bg-cyber-card/80 border-cyber-border hover:border-cyber-accent/50 shadow-lg shadow-black/20 backdrop-blur-sm' 
                     : 'bg-white border-light-border hover:border-light-accent/50 shadow-md'

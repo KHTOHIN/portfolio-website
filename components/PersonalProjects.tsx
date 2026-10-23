@@ -1,15 +1,17 @@
 import React, { useState } from 'react';
-import { PERSONAL_PROJECTS } from '../constants';
-import { Github, ExternalLink, ChevronDown, ChevronUp, FolderGit2, Search, Code2 } from 'lucide-react';
+import { PERSONAL_PROJECTS, PERSONAL_PROJECT_CATEGORIES } from '../data/profile';
+import { PersonalProjectCategory } from '../types';
+import { Github, ExternalLink, ChevronDown, ChevronUp, Search } from 'lucide-react';
 import { useTheme } from '../ThemeContext';
+import { EchoTitle } from './ui/EchoTitle';
 
 export const PersonalProjects: React.FC = () => {
   const { isDark } = useTheme();
   const [showAll, setShowAll] = useState(false);
   const [search, setSearch] = useState('');
-  const [selectedTag, setSelectedTag] = useState('All');
+  const [selectedTag, setSelectedTag] = useState<'All' | PersonalProjectCategory>('All');
 
-  const tags = ['All', 'PHP & Web', 'Java & Desktop', 'IoT & Hardware', 'Cryptography & OpenGL'];
+  const tags: ('All' | PersonalProjectCategory)[] = ['All', ...PERSONAL_PROJECT_CATEGORIES];
 
   const filtered = PERSONAL_PROJECTS.filter(p => {
     const matchesSearch = p.name.toLowerCase().includes(search.toLowerCase()) || 
@@ -18,13 +20,7 @@ export const PersonalProjects: React.FC = () => {
     
     if (!matchesSearch) return false;
 
-    if (selectedTag === 'All') return true;
-    if (selectedTag === 'PHP & Web') return p.tech.includes('PHP') || p.tech.includes('Bootstrap') || p.tech.includes('JavaScript');
-    if (selectedTag === 'Java & Desktop') return p.tech.includes('Java');
-    if (selectedTag === 'IoT & Hardware') return p.tech.includes('C++') || p.tech.includes('Bluetooth') || p.tech.includes('Sensors') || p.tech.includes('Arduino');
-    if (selectedTag === 'Cryptography & OpenGL') return p.name.includes('Cryptography') || p.name.includes('OpenGL') || p.name.includes('Cipher');
-
-    return true;
+    return selectedTag === 'All' || p.categories.includes(selectedTag);
   });
 
   const visible = showAll ? filtered : filtered.slice(0, 6);
@@ -39,25 +35,11 @@ export const PersonalProjects: React.FC = () => {
       <div className="container mx-auto px-6 md:px-8 max-w-7xl relative z-10">
         {/* Echo Title */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
-          <div>
-            <div className="relative">
-              <h2 className={`text-4xl md:text-5xl font-black font-mono tracking-tight ${
-                isDark ? 'text-cyber-accent' : 'text-light-accent'
-              }`}>
-                Personal Projects
-              </h2>
-              <h2 className={`text-4xl md:text-5xl font-black font-mono absolute top-1 left-0 opacity-20 select-none pointer-events-none ${
-                isDark ? 'text-cyber-accent' : 'text-light-accent'
-              }`}>
-                Personal Projects
-              </h2>
-            </div>
-            <p className={`mt-3 font-mono text-xs uppercase tracking-widest ${
-              isDark ? 'text-cyber-text/70' : 'text-light-text/70'
-            }`}>
-              // Open Source Repositories, R&D Prototypes & Academic Tools ({PERSONAL_PROJECTS.length} Projects)
-            </p>
-          </div>
+          <EchoTitle
+            title="Personal Projects"
+            size="md"
+            subtitle={`// Open Source Repositories, R&D Prototypes & Academic Tools (${PERSONAL_PROJECTS.length} Projects)`}
+          />
 
           {/* Quick Search */}
           <div className="relative w-full md:w-64">
@@ -96,14 +78,14 @@ export const PersonalProjects: React.FC = () => {
         </div>
 
         {/* Repositories Grid */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
           {visible.map((p, i) => (
             <a
               key={p.id}
               href={p.link}
               target="_blank"
               rel="noopener noreferrer"
-              className={`group p-5 rounded-xl border transition-all duration-300 hover:-translate-y-1 flex flex-col justify-between ${
+              className={`group min-w-0 p-5 rounded-xl border transition-all duration-300 hover:-translate-y-1 flex flex-col justify-between ${
                 isDark 
                   ? 'bg-cyber-card/80 border-cyber-border hover:border-cyber-accent/60 shadow-lg shadow-black/20' 
                   : 'bg-white border-light-border hover:border-light-accent/60 shadow-sm hover:shadow-md'
@@ -111,7 +93,7 @@ export const PersonalProjects: React.FC = () => {
             >
               <div>
                 <div className="flex items-start justify-between gap-3 mb-3">
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-2 min-w-0">
                     <span className={`text-xs font-mono font-bold ${
                       isDark ? 'text-cyber-accent/70' : 'text-light-accent/70'
                     }`}>

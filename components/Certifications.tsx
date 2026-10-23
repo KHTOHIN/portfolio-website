@@ -1,27 +1,24 @@
 import React, { useState } from 'react';
-import { CERTIFICATIONS } from '../constants';
-import { ExternalLink, Award, ShieldCheck, CheckCircle2, Search, ChevronDown, ChevronUp } from 'lucide-react';
+import { CERTIFICATIONS, CERTIFICATION_CATEGORIES } from '../data/profile';
+import { CertificationCategory } from '../types';
+import { ExternalLink, ShieldCheck, CheckCircle2, FileText, Search, ChevronDown, ChevronUp } from 'lucide-react';
 import { useTheme } from '../ThemeContext';
+import { EchoTitle } from './ui/EchoTitle';
 
 export const Certifications: React.FC = () => {
   const { isDark } = useTheme();
   const [search, setSearch] = useState('');
-  const [category, setCategory] = useState('All');
+  const [category, setCategory] = useState<'All' | CertificationCategory>('All');
   const [showAll, setShowAll] = useState(false);
 
-  const categories = ['All', 'Security & Python', 'Web & Java', 'Data & SQL'];
+  const categories: ('All' | CertificationCategory)[] = ['All', ...CERTIFICATION_CATEGORIES];
 
   const filtered = CERTIFICATIONS.filter(cert => {
     const matchesSearch = cert.title.toLowerCase().includes(search.toLowerCase()) ||
                           cert.issuer.toLowerCase().includes(search.toLowerCase());
     if (!matchesSearch) return false;
 
-    if (category === 'All') return true;
-    if (category === 'Security & Python') return cert.title.toLowerCase().includes('security') || cert.title.toLowerCase().includes('python') || cert.title.toLowerCase().includes('phyto');
-    if (category === 'Web & Java') return cert.title.toLowerCase().includes('web') || cert.title.toLowerCase().includes('java') || cert.title.toLowerCase().includes('html') || cert.title.toLowerCase().includes('css');
-    if (category === 'Data & SQL') return cert.title.toLowerCase().includes('sql') || cert.title.toLowerCase().includes('big data') || cert.title.toLowerCase().includes('data');
-
-    return true;
+    return category === 'All' || cert.category === category;
   });
 
   const displayed = showAll ? filtered : filtered.slice(0, 6);
@@ -36,25 +33,10 @@ export const Certifications: React.FC = () => {
       <div className="container mx-auto px-6 md:px-8 max-w-7xl relative z-10">
         {/* Echo Title */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
-          <div>
-            <div className="relative">
-              <h2 className={`text-5xl md:text-6xl font-black font-mono tracking-tight ${
-                isDark ? 'text-cyber-accent' : 'text-light-accent'
-              }`}>
-                Certifications
-              </h2>
-              <h2 className={`text-5xl md:text-6xl font-black font-mono absolute top-1 left-0 opacity-20 select-none pointer-events-none ${
-                isDark ? 'text-cyber-accent' : 'text-light-accent'
-              }`}>
-                Certifications
-              </h2>
-            </div>
-            <p className={`mt-3 font-mono text-xs uppercase tracking-widest ${
-              isDark ? 'text-cyber-text/70' : 'text-light-text/70'
-            }`}>
-              // Professional Licenses, Global Credentials & Specialized Trainings ({CERTIFICATIONS.length} Total)
-            </p>
-          </div>
+          <EchoTitle
+            title="Certifications"
+            subtitle={`// Professional Licenses, Global Credentials & Specialized Trainings (${CERTIFICATIONS.length} Total)`}
+          />
 
           {/* Quick Search */}
           <div className="relative w-full md:w-64">
@@ -95,11 +77,11 @@ export const Certifications: React.FC = () => {
         </div>
 
         {/* Certifications Grid */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {displayed.map((cert, index) => (
             <div
               key={cert.id}
-              className={`p-6 rounded-2xl border transition-all duration-300 hover:-translate-y-1 flex flex-col justify-between group ${
+              className={`min-w-0 p-6 rounded-2xl border transition-all duration-300 hover:-translate-y-1 flex flex-col justify-between group ${
                 isDark 
                   ? 'bg-cyber-card/85 border-cyber-border hover:border-cyber-accent/60 shadow-lg shadow-black/20 backdrop-blur-sm' 
                   : 'bg-white border-light-border hover:border-light-accent/60 shadow-md'
@@ -129,19 +111,33 @@ export const Certifications: React.FC = () => {
                 <p className={`text-xs font-mono flex items-center gap-1.5 ${
                   isDark ? 'text-cyber-text' : 'text-light-text'
                 }`}>
-                  <ShieldCheck size={13} className={isDark ? 'text-cyber-accent' : 'text-light-accent'} />
+                  <ShieldCheck size={13} className={`flex-shrink-0 ${isDark ? 'text-cyber-accent' : 'text-light-accent'}`} />
                   {cert.issuer}
                 </p>
+
+                {cert.expires && (
+                  <p className={`mt-1.5 text-[11px] font-mono ${isDark ? 'text-cyber-text/60' : 'text-light-text/60'}`}>
+                    Expires {cert.expires}
+                  </p>
+                )}
               </div>
 
-              <div className="mt-6 pt-4 border-t border-dashed flex items-center justify-between">
-                <span className={`text-[11px] font-mono flex items-center gap-1 ${
-                  isDark ? 'text-emerald-400' : 'text-emerald-600'
-                }`}>
-                  <CheckCircle2 size={12} /> Verified
-                </span>
-
+              <div className="mt-6 pt-4 border-t border-dashed flex flex-wrap items-center justify-between gap-2">
                 {cert.link ? (
+                  <span className={`text-[11px] font-mono flex items-center gap-1 ${
+                    isDark ? 'text-emerald-400' : 'text-emerald-600'
+                  }`}>
+                    <CheckCircle2 size={12} /> Verified
+                  </span>
+                ) : (
+                  <span className={`text-[11px] font-mono flex items-center gap-1 ${
+                    isDark ? 'text-cyber-text/60' : 'text-light-text/60'
+                  }`}>
+                    <FileText size={12} /> Certificate of completion
+                  </span>
+                )}
+
+                {cert.link && (
                   <a
                     href={cert.link}
                     target="_blank"
@@ -154,12 +150,6 @@ export const Certifications: React.FC = () => {
                   >
                     View Credential <ExternalLink size={12} />
                   </a>
-                ) : (
-                  <span className={`text-[11px] font-mono ${
-                    isDark ? 'text-cyber-text/50' : 'text-light-text/50'
-                  }`}>
-                    Official Certificate
-                  </span>
                 )}
               </div>
             </div>

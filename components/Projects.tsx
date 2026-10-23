@@ -1,12 +1,28 @@
 import React, { useState } from 'react';
-import { PROJECTS } from '../constants';
-import { ExternalLink, CheckCircle2, ChevronDown, ChevronUp, Building2, ShieldCheck, Database, Layers, ArrowUpRight } from 'lucide-react';
+import { PROJECTS } from '../data/profile';
+import { ProjectStatus } from '../types';
+import { CheckCircle2, ChevronDown, ChevronUp, ArrowUpRight, CalendarDays } from 'lucide-react';
 import { useTheme } from '../ThemeContext';
+import { EchoTitle } from './ui/EchoTitle';
+
+const statusStyles: Record<ProjectStatus, { dark: string; light: string }> = {
+  'Production': {
+    dark: 'bg-emerald-950/40 border-emerald-500/40 text-emerald-400',
+    light: 'bg-emerald-50 border-emerald-200 text-emerald-700',
+  },
+  'Ready for go-live': {
+    dark: 'bg-cyan-950/40 border-cyan-400/40 text-cyan-300',
+    light: 'bg-cyan-50 border-cyan-200 text-cyan-800',
+  },
+  'In development': {
+    dark: 'bg-amber-950/40 border-amber-500/40 text-amber-300',
+    light: 'bg-amber-50 border-amber-200 text-amber-800',
+  },
+};
 
 export const Projects: React.FC = () => {
   const { isDark } = useTheme();
   const [showAll, setShowAll] = useState(false);
-  const [filter, setFilter] = useState<string>('All');
 
   const displayed = showAll ? PROJECTS : PROJECTS.slice(0, 4);
 
@@ -19,30 +35,18 @@ export const Projects: React.FC = () => {
 
       <div className="container mx-auto px-6 md:px-8 max-w-7xl relative z-10">
         {/* Echo Title */}
-        <div className="relative mb-16">
-          <h2 className={`text-5xl md:text-6xl font-black font-mono tracking-tight ${
-            isDark ? 'text-cyber-accent' : 'text-light-accent'
-          }`}>
-            Projects
-          </h2>
-          <h2 className={`text-5xl md:text-6xl font-black font-mono absolute top-1 left-0 opacity-20 select-none pointer-events-none ${
-            isDark ? 'text-cyber-accent' : 'text-light-accent'
-          }`}>
-            Projects
-          </h2>
-          <p className={`mt-3 font-mono text-xs uppercase tracking-widest ${
-            isDark ? 'text-cyber-text/70' : 'text-light-text/70'
-          }`}>
-            // Flagship Government & Enterprise Systems Engineered for National Scale
-          </p>
-        </div>
+        <EchoTitle
+          title="Projects"
+          subtitle="// Flagship Government & Enterprise Systems Engineered for National Scale"
+          className="mb-16"
+        />
 
         {/* Project Cards Grid / Stack */}
         <div className="space-y-8 max-w-5xl mx-auto">
           {displayed.map((project, index) => (
             <div 
               key={project.id} 
-              className={`p-7 sm:p-9 rounded-2xl border transition-all duration-300 group relative overflow-hidden ${
+              className={`min-w-0 p-5 sm:p-9 rounded-2xl border transition-all duration-300 group relative overflow-hidden ${
                 isDark 
                   ? 'bg-cyber-card/90 border-cyber-border hover:border-cyber-accent/60 shadow-xl shadow-black/30 backdrop-blur-sm' 
                   : 'bg-white border-light-border hover:border-light-accent/60 shadow-lg shadow-slate-200/50'
@@ -54,8 +58,8 @@ export const Projects: React.FC = () => {
               }`} />
 
               <div className="flex flex-col md:flex-row md:items-start justify-between gap-4 mb-4">
-                <div className="space-y-1">
-                  <div className="flex items-center gap-3">
+                <div className="space-y-1 min-w-0">
+                  <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5">
                     <span className={`text-xs font-mono font-bold px-2.5 py-0.5 rounded-full ${
                       isDark ? 'bg-cyber-accent/15 text-cyber-accent border border-cyber-accent/30' : 'bg-light-accent/10 text-light-accent border border-light-accent/20'
                     }`}>
@@ -67,6 +71,14 @@ export const Projects: React.FC = () => {
                     }`}>
                       Gov / Enterprise
                     </span>
+
+                    {project.status && (
+                      <span className={`text-[10px] font-mono font-bold uppercase tracking-wider px-2 py-0.5 rounded-full border ${
+                        isDark ? statusStyles[project.status].dark : statusStyles[project.status].light
+                      }`}>
+                        {project.status}
+                      </span>
+                    )}
                   </div>
 
                   <h3 className={`text-xl sm:text-2xl font-bold font-mono tracking-tight mt-2 ${
@@ -150,7 +162,7 @@ export const Projects: React.FC = () => {
                 <span className={`text-[11px] font-mono flex items-center gap-1 ${
                   isDark ? 'text-cyber-text/60' : 'text-light-text/60'
                 }`}>
-                  <ShieldCheck size={12} className={isDark ? 'text-cyber-accent' : 'text-light-accent'} /> Production Deployed
+                  <CalendarDays size={12} className={isDark ? 'text-cyber-accent' : 'text-light-accent'} /> {project.period}
                 </span>
               </div>
             </div>

@@ -1,7 +1,8 @@
 import React from 'react';
-import { ACHIEVEMENTS } from '../constants';
-import { Trophy, Sparkles, Award, CheckCircle2 } from 'lucide-react';
+import { ACHIEVEMENTS } from '../data/profile';
+import { Trophy } from 'lucide-react';
 import { useTheme } from '../ThemeContext';
+import { EchoTitle } from './ui/EchoTitle';
 
 export const Achievements: React.FC = () => {
   const { isDark } = useTheme();
@@ -15,23 +16,12 @@ export const Achievements: React.FC = () => {
 
       <div className="container mx-auto px-6 md:px-8 max-w-7xl relative z-10">
         {/* Echo Title */}
-        <div className="relative mb-12">
-          <h2 className={`text-4xl md:text-5xl font-black font-mono tracking-tight ${
-            isDark ? 'text-cyber-accent' : 'text-light-accent'
-          }`}>
-            Achievements
-          </h2>
-          <h2 className={`text-4xl md:text-5xl font-black font-mono absolute top-1 left-0 opacity-20 select-none pointer-events-none ${
-            isDark ? 'text-cyber-accent' : 'text-light-accent'
-          }`}>
-            Achievements
-          </h2>
-          <p className={`mt-3 font-mono text-xs uppercase tracking-widest ${
-            isDark ? 'text-cyber-text/70' : 'text-light-text/70'
-          }`}>
-            // Organizational Honors, Special Recognitions & Impact Awards
-          </p>
-        </div>
+        <EchoTitle
+          title="Achievements"
+          size="md"
+          subtitle="// Organizational Honors & Letters of Appreciation"
+          className="mb-12"
+        />
 
         <div className="max-w-4xl mx-auto space-y-6">
           {ACHIEVEMENTS.map((a) => (
@@ -50,7 +40,7 @@ export const Achievements: React.FC = () => {
                   <Trophy size={28} />
                 </div>
 
-                <div className="space-y-1.5 flex-1">
+                <div className="space-y-1.5 flex-1 min-w-0">
                   <div className="flex flex-wrap items-center gap-2.5">
                     <span className={`text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full ${
                       isDark ? 'bg-amber-500/20 text-amber-300 border border-amber-500/40' : 'bg-amber-100 text-amber-800'

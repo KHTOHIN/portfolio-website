@@ -1,12 +1,10 @@
 import React from 'react';
-import { PERSONAL_INFO } from '../constants';
+import { PERSONAL_INFO, HERO } from '../data/profile';
 import { useTheme } from '../ThemeContext';
 import { ArrowDown, FileText, Send, Sparkles, Terminal, Code2, Database, ShieldCheck } from 'lucide-react';
 
 export const Hero: React.FC = () => {
   const { isDark } = useTheme();
-
-  const corePills = ["PHP", "Laravel", "Java", "Spring Boot", "MySQL", "Linux", "Docker", "REST API"];
 
   return (
     <section id="hero" className={`relative min-h-screen flex items-center overflow-hidden pt-20 pb-16 transition-colors duration-300 ${
@@ -40,24 +38,31 @@ export const Hero: React.FC = () => {
                 isDark ? 'bg-emerald-950/40 border-emerald-500/30 text-emerald-400' : 'bg-emerald-50 border-emerald-200 text-emerald-700'
               }`}>
                 <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                Available for Full-time (Remote & On-site)
+                {PERSONAL_INFO.availability}
               </div>
             </div>
 
-            {/* Giant Bold Typographic Title */}
-            <div className="space-y-1">
-              <h1 className={`text-6xl sm:text-7xl md:text-8xl font-black font-mono leading-none tracking-tight ${
+            {/* Giant Bold Typographic Title (single h1; the name is read by crawlers & screen readers) */}
+            <h1 className="space-y-1">
+              <span className="sr-only">{PERSONAL_INFO.name} — </span>
+              <span className={`block text-5xl sm:text-7xl md:text-8xl font-black font-mono leading-none tracking-tight ${
                 isDark ? 'text-cyber-heading' : 'text-light-heading'
               }`}>
                 Software
-              </h1>
-              <h1 className={`text-6xl sm:text-7xl md:text-8xl font-black font-mono leading-none tracking-tight flex items-baseline gap-2 ${
+              </span>{' '}
+              <span className={`text-5xl sm:text-7xl md:text-8xl font-black font-mono leading-none tracking-tight flex items-baseline gap-2 ${
                 isDark ? 'text-cyber-accent drop-shadow-[0_0_35px_rgba(0,240,255,0.25)]' : 'text-light-accent'
               }`}>
                 Engineer
-                <span className="text-2xl sm:text-4xl animate-bounce">_</span>
-              </h1>
-            </div>
+                <span aria-hidden="true" className="text-2xl sm:text-4xl animate-bounce">_</span>
+              </span>
+            </h1>
+
+            <p className={`text-sm sm:text-base font-mono font-semibold ${
+              isDark ? 'text-cyber-accent' : 'text-light-accent'
+            }`}>
+              {PERSONAL_INFO.role}
+            </p>
 
             {/* Headline / Summary */}
             <p className={`text-base sm:text-lg font-mono max-w-2xl leading-relaxed ${
@@ -74,7 +79,7 @@ export const Hero: React.FC = () => {
                 // Core Technologies:
               </span>
               <div className="flex flex-wrap gap-2">
-                {corePills.map((tech) => (
+                {HERO.coreTechnologies.map((tech) => (
                   <span
                     key={tech}
                     className={`px-3 py-1 rounded-lg text-xs font-mono font-medium border transition-all duration-200 hover:-translate-y-0.5 ${
@@ -130,7 +135,7 @@ export const Hero: React.FC = () => {
           {/* Right Column: Futuristic Tech Orbit & Visual Radar Card (5 Cols) */}
           <div className="lg:col-span-5 relative flex items-center justify-center pt-8 lg:pt-0">
             {/* Geometric Concentric Rings */}
-            <div className="relative w-80 h-80 sm:w-96 sm:h-96 flex items-center justify-center">
+            <div className="relative w-72 h-72 sm:w-96 sm:h-96 flex items-center justify-center">
               {/* Outer Glowing Circle */}
               <div className={`absolute inset-0 rounded-full border border-dashed animate-spin-slow ${
                 isDark ? 'border-cyber-accent/30' : 'border-light-accent/30'
@@ -158,7 +163,7 @@ export const Hero: React.FC = () => {
                   <Code2 size={24} />
                 </div>
                 <h3 className={`text-base font-bold font-mono ${isDark ? 'text-white' : 'text-light-heading'}`}>
-                  Full-Stack Specialist
+                  {PERSONAL_INFO.positioning}
                 </h3>
                 <p className={`text-xs font-mono mt-1 ${isDark ? 'text-cyber-accent' : 'text-light-accent'}`}>
                   Gov & Enterprise Systems
@@ -174,19 +179,19 @@ export const Hero: React.FC = () => {
               <div className={`absolute -top-3 left-6 px-3 py-1 rounded-lg text-[11px] font-mono font-bold border shadow-md animate-float ${
                 isDark ? 'bg-cyber-darker border-cyber-accent/40 text-cyber-accent' : 'bg-white border-light-accent/40 text-light-accent'
               }`}>
-                ⚡ 30% Query Boost
+                {HERO.badges.performance}
               </div>
 
               <div className={`absolute -bottom-2 right-4 px-3 py-1 rounded-lg text-[11px] font-mono font-bold border shadow-md animate-float ${
                 isDark ? 'bg-cyber-darker border-amber-500/40 text-amber-300' : 'bg-white border-amber-300 text-amber-700'
               }`} style={{ animationDelay: '1.5s' }}>
-                🏛️ DAE & CCI&E Portals
+                {HERO.badges.clients}
               </div>
 
               <div className={`absolute top-1/2 -left-6 -translate-y-1/2 px-2.5 py-1 rounded-lg text-[10px] font-mono font-bold border shadow-md hidden sm:block ${
                 isDark ? 'bg-cyber-darker border-cyber-border text-cyber-heading' : 'bg-white border-light-border text-slate-700'
               }`}>
-                🔒 Digital Security
+                {HERO.badges.security}
               </div>
             </div>
           </div>

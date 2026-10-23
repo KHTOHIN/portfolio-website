@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useTheme } from '../ThemeContext';
 import { ArrowUp, FileText } from 'lucide-react';
-import { PERSONAL_INFO } from '../constants';
+import { PERSONAL_INFO } from '../data/profile';
 
 export const SidebarNav: React.FC = () => {
   const { isDark } = useTheme();
@@ -26,7 +26,7 @@ export const SidebarNav: React.FC = () => {
       const scrollPosition = window.scrollY + 250;
       for (let i = sections.length - 1; i >= 0; i--) {
         const section = document.getElementById(sections[i].id);
-        if (section && section.offsetTop <= scrollPosition) {
+        if (section && section.getBoundingClientRect().top + window.scrollY <= scrollPosition) {
           setActiveSection(sections[i].id);
           break;
         }

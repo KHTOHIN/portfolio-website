@@ -1,6 +1,7 @@
 import React from 'react';
-import { EXPERIENCE } from '../constants';
+import { EXPERIENCE, YEARS_OF_EXPERIENCE } from '../data/profile';
 import { useTheme } from '../ThemeContext';
+import { EchoTitle } from './ui/EchoTitle';
 
 export const Experience: React.FC = () => {
   const { isDark } = useTheme();
@@ -12,25 +13,17 @@ export const Experience: React.FC = () => {
 
       <div className="container mx-auto px-6 md:px-8 max-w-7xl relative z-10">
         {/* Echo Title */}
-        <div className="relative mb-16">
-          <h2 className={`text-5xl md:text-6xl font-black font-mono tracking-tight ${isDark ? 'text-cyber-accent' : 'text-light-accent'}`}>
-            Experience
-          </h2>
-          <h2 className={`text-5xl md:text-6xl font-black font-mono absolute top-1 left-0 opacity-20 select-none pointer-events-none ${isDark ? 'text-cyber-accent' : 'text-light-accent'}`}>
-            Experience
-          </h2>
-          <p className={`mt-3 font-mono text-xs uppercase tracking-widest ${
-            isDark ? 'text-cyber-text/70' : 'text-light-text/70'
-          }`}>
-            // 5+ Years of Engineering Production Systems & National-Scale Applications
-          </p>
-        </div>
+        <EchoTitle
+          title="Experience"
+          subtitle={`// ${YEARS_OF_EXPERIENCE}+ Years of Engineering Production Systems & National-Scale Applications`}
+          className="mb-16"
+        />
 
         <div className="max-w-3xl mx-auto space-y-12">
           {EXPERIENCE.map((job, index) => (
             <div 
               key={job.id} 
-              className={`border-l-2 pl-8 transition-colors duration-300 relative group ${
+              className={`min-w-0 border-l-2 pl-5 sm:pl-8 transition-colors duration-300 relative group ${
                 isDark ? 'border-cyber-border hover:border-cyber-accent' : 'border-light-border hover:border-light-accent'
               }`}
             >
@@ -54,12 +47,12 @@ export const Experience: React.FC = () => {
               </div>
 
               <span className={`font-mono text-xs block mt-1 ${isDark ? 'text-cyber-text/50' : 'text-light-text/50'}`}>
-                {job.location}
+                {job.location} · {job.workMode}
               </span>
 
               <ul className="mt-3 space-y-1.5">
                 {job.description.map((desc, i) => (
-                  <li key={i} className={`font-mono text-xs uppercase leading-relaxed tracking-wide ${isDark ? 'text-cyber-text/70' : 'text-light-text/70'}`}>
+                  <li key={i} className={`text-sm leading-relaxed ${isDark ? 'text-cyber-text/70' : 'text-light-text/70'}`}>
                     • {desc}
                   </li>
                 ))}

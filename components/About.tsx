@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { ABOUT, CERTIFICATIONS, EDUCATION, ACHIEVEMENTS, PERSONAL_INFO } from '../constants';
+import { ABOUT, CERTIFICATIONS, EDUCATION, ACHIEVEMENTS, PERSONAL_INFO, EXPERIENCE_LABEL } from '../data/profile';
+import { EchoTitle } from './ui/EchoTitle';
 import { useTheme } from '../ThemeContext';
 import { 
   GraduationCap, 
@@ -23,12 +24,8 @@ export const About: React.FC = () => {
   const { isDark } = useTheme();
   const [activeTab, setActiveTab] = useState<'all' | 'education' | 'credentials'>('all');
 
-  const pillars = [
-    { icon: Layers, title: "Gov & Enterprise Systems", desc: "Large-scale citizen services (DAE, CCI&E, BWDB)" },
-    { icon: Database, title: "SQL & Query Optimization", desc: "Indexing, query tuning & high-concurrency storage" },
-    { icon: ShieldCheck, title: "Security & Digital Signing", desc: "PDF signature workflows, malware scanning & BTRC APIs" },
-    { icon: Terminal, title: "Linux & Workflow Automation", desc: "Cron jobs, Shell scripting, backup automation" },
-  ];
+  const pillarIcons = [Layers, Database, ShieldCheck, Terminal];
+  const pillars = ABOUT.pillars.map((pillar, i) => ({ ...pillar, icon: pillarIcons[i % pillarIcons.length] }));
 
   return (
     <section id="about" className={`py-20 md:py-32 relative transition-colors duration-300 ${isDark ? 'bg-cyber-dark' : 'bg-light-bg'}`}>
@@ -37,21 +34,15 @@ export const About: React.FC = () => {
       
       <div className="container mx-auto px-6 md:px-8 max-w-7xl relative z-10">
         {/* Echo Title */}
-        <div className="relative mb-16">
-          <h2 className={`text-5xl md:text-6xl font-black font-mono tracking-tight ${isDark ? 'text-cyber-accent' : 'text-light-accent'}`}>
-            About
-          </h2>
-          <h2 className={`text-5xl md:text-6xl font-black font-mono absolute top-1 left-0 opacity-20 select-none pointer-events-none ${isDark ? 'text-cyber-accent' : 'text-light-accent'}`}>
-            About
-          </h2>
-          <p className={`mt-3 font-mono text-xs uppercase tracking-widest ${isDark ? 'text-cyber-text/70' : 'text-light-text/70'}`}>
-            // Background, Academic Journey & Engineering Philosophy
-          </p>
-        </div>
+        <EchoTitle
+          title="About"
+          subtitle="// Background, Academic Journey & Engineering Philosophy"
+          className="mb-16"
+        />
 
         <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-start">
           {/* Left Column: Bio & Core Values (5 Cols) */}
-          <div className="lg:col-span-5 space-y-8">
+          <div className="lg:col-span-5 space-y-8 min-w-0">
             {/* Photo & Identity Card */}
             <div className={`p-6 rounded-2xl border transition-all duration-300 ${
               isDark 
@@ -83,16 +74,19 @@ export const About: React.FC = () => {
                   <span className={`inline-flex items-center gap-1.5 text-xs font-mono font-medium px-2.5 py-1 rounded-full ${
                     isDark ? 'bg-cyber-accent/10 text-cyber-accent' : 'bg-light-accent/10 text-light-accent'
                   }`}>
-                    <Briefcase size={12} /> Software Engineer I
+                    <Briefcase size={12} /> {PERSONAL_INFO.shortRole}
                   </span>
                   <h3 className={`text-xl font-bold font-mono tracking-tight ${isDark ? 'text-cyber-heading' : 'text-light-heading'}`}>
                     {PERSONAL_INFO.name}
                   </h3>
+                  <p className={`text-xs font-mono font-semibold ${isDark ? 'text-cyber-accent' : 'text-light-accent'}`}>
+                    {PERSONAL_INFO.role}
+                  </p>
                   <p className={`text-xs font-mono flex items-center justify-center sm:justify-start gap-1 ${isDark ? 'text-cyber-text/80' : 'text-light-text/80'}`}>
-                    <MapPin size={12} className={isDark ? 'text-cyber-accent' : 'text-light-accent'} /> Dhaka, Bangladesh
+                    <MapPin size={12} className={isDark ? 'text-cyber-accent' : 'text-light-accent'} /> {PERSONAL_INFO.location} · {PERSONAL_INFO.workMode}
                   </p>
                   <p className={`text-xs font-mono pt-2 ${isDark ? 'text-cyber-text/70' : 'text-light-text/70'}`}>
-                    5+ Years crafting government & enterprise solutions.
+                    {EXPERIENCE_LABEL} crafting government & enterprise solutions.
                   </p>
                 </div>
               </div>
@@ -169,9 +163,9 @@ export const About: React.FC = () => {
           </div>
 
           {/* Right Column: Redesigned Education & Achievements/Certifications (7 Cols) */}
-          <div className="lg:col-span-7 space-y-8">
+          <div className="lg:col-span-7 space-y-8 min-w-0">
             {/* View Mode Filter Tabs */}
-            <div className={`p-1.5 rounded-xl border inline-flex items-center gap-1 text-xs font-mono ${
+            <div className={`p-1.5 rounded-xl border inline-flex flex-wrap max-w-full items-center gap-1 text-xs font-mono ${
               isDark ? 'bg-cyber-card border-cyber-border' : 'bg-slate-100 border-light-border'
             }`}>
               <button
@@ -352,7 +346,7 @@ export const About: React.FC = () => {
                       isDark ? 'text-cyber-accent hover:underline' : 'text-light-accent hover:underline'
                     }`}
                   >
-                    View All (10+) <ArrowRight size={12} />
+                    View All ({CERTIFICATIONS.length}) <ArrowRight size={12} />
                   </a>
                 </div>
 
@@ -400,7 +394,7 @@ export const About: React.FC = () => {
                           </a>
                         ) : (
                           <span className={`text-[10px] font-mono ${isDark ? 'text-cyber-text/40' : 'text-light-text/40'}`}>
-                            Certified
+                            Certificate of completion
                           </span>
                         )}
                       </div>

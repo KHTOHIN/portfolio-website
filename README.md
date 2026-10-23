@@ -11,10 +11,10 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](LICENSE)
 
 <p align="center">
-  A high-performance, developer portfolio showcasing 5+ years of enterprise software engineering, national-scale government automation systems, database optimization, and technical articles.
+  A high-performance, developer portfolio showcasing 6+ years of enterprise software engineering, national-scale government automation systems, database optimization, and technical articles.
 </p>
 
-[**Explore Live Demo**](#) • [**View Resume**](public/Kawsar_Hamid_Resume.pdf) • [**LinkedIn**](https://www.linkedin.com/in/kawsar-hamid-tohin/) • [**GitHub**](https://github.com/KHTohin)
+[**Explore Live Demo**](https://kawsarhamid.vercel.app) • [**View Resume**](public/Kawsar_Hamid_Resume.pdf) • [**LinkedIn**](https://www.linkedin.com/in/kawsar-hamid-tohin/) • [**GitHub**](https://github.com/KHTohin)
 
 </div>
 
@@ -39,9 +39,9 @@
 
 ## 👨‍💻 About The Portfolio
 
-This portfolio represents the professional work, skills, certifications, and enterprise contributions of **Kawsar Hamid** (Software Engineer I / Programmer).
+This portfolio represents the professional work, skills, certifications, and enterprise contributions of **Kawsar Hamid** (Software Engineer II — Backend: PHP/Laravel, Java/Spring Boot, Oracle).
 
-Specializing in **system design, high-performance SQL optimization, robust RESTful APIs, and mission-critical government platforms** (including DAE, CCI&E, and national tracking systems), this application is designed with a sleek **Cyberpunk / Modern Minimalist Dark & Light mode** interface.
+Specializing in **system design, high-performance SQL optimization, robust RESTful APIs, and mission-critical government platforms** (including BRTA MVTax, DAE, CCI&E, BWDB and JBC), this application is designed with a sleek **Cyberpunk / Modern Minimalist Dark & Light mode** interface.
 
 ---
 
@@ -69,7 +69,8 @@ Specializing in **system design, high-performance SQL optimization, robust RESTf
 - **Icons**: [Lucide React](https://lucide.dev/)
 
 ### Core Concepts & Patterns
-- Single-Source-of-Truth configuration via `constants.ts`
+- Single-Source-of-Truth content in `data/profile.ts` (synced with LinkedIn); all counters are derived from it
+- Build-time SEO (`vite-plugin-seo.ts`): meta, Open Graph, Twitter card, JSON-LD, per-article pages and `sitemap.xml`
 - Clean Component Architecture with strict TypeScript type definitions (`types.ts`)
 - Context API for global theme switching (`ThemeContext.tsx`)
 
@@ -84,7 +85,11 @@ Kawsar-Hamid-Portfolio/
 ├── App.tsx                  # Root layout & section composition
 ├── ThemeContext.tsx         # Dark/Light theme state provider
 ├── types.ts                 # TypeScript interfaces and data models
-├── constants.ts             # All portfolio content, projects, experience, certs
+├── data/profile.ts          # All portfolio content (single source of truth)
+├── utils/text.ts            # Initials, read time and years-of-experience helpers
+├── vite-plugin-seo.ts       # SEO head tags, /blog/<slug> pages and sitemap at build time
+├── scripts/og-image.html    # Source for public/og-image.png (1200x630 link preview)
+├── vercel.json              # Clean URLs + /blog/* fallback
 ├── components/              # Modular UI section components
 │   ├── Hero.tsx             # Hero section with headline and CTAs
 │   ├── Highlights.tsx       # Key career metrics banner
@@ -101,7 +106,6 @@ Kawsar-Hamid-Portfolio/
 │   ├── Navbar.tsx           # Floating responsive navigation bar
 │   ├── SidebarNav.tsx       # Quick-jump section navigation
 │   ├── SocialSidebar.tsx    # Sticky social connection icons
-│   └── Footer.tsx           # Footer with copyright and quick links
 ├── public/                  # Static assets, resume PDF, and favicon
 ├── vite.config.ts           # Vite configuration
 ├── tsconfig.json            # TypeScript configuration
@@ -124,8 +128,8 @@ npm -v
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/KHTohin/Kawsar-Hamid-Portfolio.git
-   cd Kawsar-Hamid-Portfolio
+   git clone https://github.com/KHTOHIN/portfolio-website.git
+   cd portfolio-website
    ```
 
 2. Install dependencies:
@@ -139,7 +143,12 @@ Start the local development server with Hot Module Replacement (HMR):
 ```bash
 npm run dev
 ```
-Open your browser and navigate to `http://localhost:5173` (or the port specified in terminal).
+Open your browser and navigate to `http://localhost:3000`.
+
+Type-check the project:
+```bash
+npm run typecheck
+```
 
 ### Production Build
 
@@ -158,10 +167,10 @@ npm run preview
 ## 📋 Portfolio Sections
 
 1. **Hero**: Quick introduction, technical roles, quick contact links, and resume download.
-2. **Career Highlights**: High-level impact stats (5+ years exp, enterprise/gov domain, core stack).
+2. **Career Highlights**: High-level impact stats (years of experience computed from Oct 2020, enterprise/gov domain, core stack).
 3. **About Me**: Engineering philosophy, backend & server automation workflows, architecture principles.
-4. **Experience**: Career timeline from Software Engineer I at Synesis IT PLC to earlier roles.
-5. **Projects**: In-depth coverage of high-impact government platforms (CCI&E, DAE Phyto-Sanitary, Contract Farming).
+4. **Experience**: Career timeline from Software Engineer II at Synesis IT PLC back to the 2019 internship.
+5. **Projects**: In-depth coverage of high-impact government platforms (BRTA MVTax, DAE Phyto-Sanitary Phase 1 & 2, Contract Farming, CCI&E) with status and dates.
 6. **Personal Projects**: Open-source repositories and utility systems.
 7. **Skills Matrix**: Categorized breakdown across Languages, Frameworks, Databases, Server Tools, and Core Concepts.
 8. **Certifications**: Searchable & filterable professional certifications with live verification links.
@@ -174,9 +183,9 @@ npm run preview
 
 ## ⚙️ Customization
 
-All portfolio data is centralized in `constants.ts`. To update personal info, projects, or experience:
+All portfolio data is centralized in `data/profile.ts`. To update personal info, projects, or experience:
 
-1. Open `constants.ts`.
+1. Open `data/profile.ts`.
 2. Modify the relevant exported constant (`PERSONAL_INFO`, `EXPERIENCE`, `PROJECTS`, `CERTIFICATIONS`, etc.).
 3. The UI components will automatically reflect the updated content without requiring structural changes.
 
@@ -185,7 +194,7 @@ All portfolio data is centralized in `constants.ts`. To update personal info, pr
 ## 📬 Contact & Connect
 
 - **Name**: Kawsar Hamid
-- **Role**: Software Engineer I | Programmer
+- **Role**: Software Engineer II — Backend (PHP/Laravel, Java/Spring Boot, Oracle)
 - **Location**: Dhaka, Bangladesh
 - **Email**: [kawsarhamidtohin@gmail.com](mailto:kawsarhamidtohin@gmail.com)
 - **WhatsApp**: [+8801750047354](https://wa.me/8801750047354)

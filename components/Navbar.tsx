@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X, Sun, Moon, FileText, Send, Sparkles } from 'lucide-react';
-import { PERSONAL_INFO } from '../constants';
+import { PERSONAL_INFO } from '../data/profile';
 import { useTheme } from '../ThemeContext';
 
 export const Navbar: React.FC = () => {
@@ -27,7 +27,7 @@ export const Navbar: React.FC = () => {
       const scrollPosition = window.scrollY + 200;
       for (let i = navLinks.length - 1; i >= 0; i--) {
         const el = document.getElementById(navLinks[i].id);
-        if (el && el.offsetTop <= scrollPosition) {
+        if (el && el.getBoundingClientRect().top + window.scrollY <= scrollPosition) {
           setActiveSection(navLinks[i].id);
           break;
         }
@@ -62,7 +62,7 @@ export const Navbar: React.FC = () => {
               KAWSAR HAMID
             </span>
             <span className={`font-mono text-[10px] tracking-widest uppercase block ${isDark ? 'text-cyber-accent' : 'text-light-accent'}`}>
-              Software Engineer
+              {PERSONAL_INFO.shortRole}
             </span>
           </div>
         </a>

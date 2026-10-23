@@ -1,7 +1,12 @@
 import React, { useState } from 'react';
-import { TESTIMONIALS } from '../constants';
-import { ChevronLeft, ChevronRight, Quote, Star, Sparkles, UserCheck, X, ChevronDown, ChevronUp } from 'lucide-react';
+import { TESTIMONIALS } from '../data/profile';
+import { Quote, Star, X, ChevronDown, ChevronUp } from 'lucide-react';
 import { useTheme } from '../ThemeContext';
+import { initials } from '../utils/text';
+import { EchoTitle } from './ui/EchoTitle';
+
+const relationshipLine = (t: { relationship?: string; date?: string }) =>
+  [t.relationship, t.date].filter(Boolean).join(' · ');
 
 export const Testimonials: React.FC = () => {
   const { isDark } = useTheme();
@@ -27,25 +32,10 @@ export const Testimonials: React.FC = () => {
       <div className="container mx-auto px-6 md:px-8 max-w-7xl relative z-10">
         {/* Echo Title */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6">
-          <div>
-            <div className="relative">
-              <h2 className={`text-5xl md:text-6xl font-black font-mono tracking-tight ${
-                isDark ? 'text-cyber-accent' : 'text-light-accent'
-              }`}>
-                Testimonials
-              </h2>
-              <h2 className={`text-5xl md:text-6xl font-black font-mono absolute top-1 left-0 opacity-20 select-none pointer-events-none ${
-                isDark ? 'text-cyber-accent' : 'text-light-accent'
-              }`}>
-                Testimonials
-              </h2>
-            </div>
-            <p className={`mt-3 font-mono text-xs uppercase tracking-widest ${
-              isDark ? 'text-cyber-text/70' : 'text-light-text/70'
-            }`}>
-              // Peer Endorsements, Manager Recommendations & Leadership Feedback ({TESTIMONIALS.length} Reviews)
-            </p>
-          </div>
+          <EchoTitle
+            title="Testimonials"
+            subtitle={`// Peer Endorsements, Manager Recommendations & Leadership Feedback (${TESTIMONIALS.length} Reviews)`}
+          />
 
           {/* Filter Tabs */}
           <div className="flex flex-wrap items-center gap-2">
@@ -89,19 +79,14 @@ export const Testimonials: React.FC = () => {
         </div>
 
         {/* Testimonials Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {displayed.map((t) => {
-            const initials = t.author
-              .split(' ')
-              .map(n => n[0])
-              .filter(Boolean)
-              .slice(0, 2)
-              .join('');
+            const relation = relationshipLine(t);
 
             return (
               <div
                 key={t.id}
-                className={`p-7 rounded-2xl border transition-all duration-300 hover:-translate-y-1 flex flex-col justify-between group ${
+                className={`min-w-0 p-5 sm:p-7 rounded-2xl border transition-all duration-300 hover:-translate-y-1 flex flex-col justify-between group ${
                   isDark 
                     ? 'bg-cyber-card/85 border-cyber-border hover:border-cyber-accent/60 shadow-lg shadow-black/20 backdrop-blur-sm' 
                     : 'bg-white border-light-border hover:border-light-accent/60 shadow-md'
@@ -146,7 +131,7 @@ export const Testimonials: React.FC = () => {
                   <div className={`w-10 h-10 rounded-xl flex items-center justify-center font-mono font-bold text-xs uppercase flex-shrink-0 border ${
                     isDark ? 'bg-cyber-darker text-cyber-accent border-cyber-accent/40 shadow-sm' : 'bg-slate-100 text-light-accent border-slate-200'
                   }`}>
-                    {initials}
+                    {initials(t.author)}
                   </div>
 
                   <div className="min-w-0">
@@ -165,6 +150,13 @@ export const Testimonials: React.FC = () => {
                     }`}>
                       {t.company}
                     </p>
+                    {relation && (
+                      <p className={`text-[10px] font-mono truncate ${
+                        isDark ? 'text-cyber-text/50' : 'text-light-text/50'
+                      }`}>
+                        {relation}
+                      </p>
+                    )}
                   </div>
                 </div>
               </div>
@@ -218,7 +210,7 @@ export const Testimonials: React.FC = () => {
               <span className={`text-xs font-mono px-2.5 py-0.5 rounded-full ${
                 isDark ? 'bg-cyber-dark text-cyan-300 border border-cyber-border' : 'bg-slate-100 text-slate-700'
               }`}>
-                Verified Professional Recommendation
+                Professional Recommendation
               </span>
             </div>
 
@@ -232,9 +224,9 @@ export const Testimonials: React.FC = () => {
               <div className={`w-11 h-11 rounded-xl flex items-center justify-center font-mono font-bold text-sm border ${
                 isDark ? 'bg-cyber-dark text-cyber-accent border-cyber-accent/50' : 'bg-slate-100 text-light-accent border-slate-300'
               }`}>
-                {selectedTestimonial.author.slice(0, 2).toUpperCase()}
+                {initials(selectedTestimonial.author)}
               </div>
-              <div>
+              <div className="min-w-0">
                 <h5 className="font-bold font-mono text-sm">{selectedTestimonial.author}</h5>
                 <p className={`text-xs font-mono ${isDark ? 'text-cyber-accent' : 'text-light-accent'}`}>
                   {selectedTestimonial.role}
@@ -242,6 +234,11 @@ export const Testimonials: React.FC = () => {
                 <p className={`text-[11px] font-mono ${isDark ? 'text-cyber-text/70' : 'text-light-text/70'}`}>
                   {selectedTestimonial.company}
                 </p>
+                {relationshipLine(selectedTestimonial) && (
+                  <p className={`text-[11px] font-mono ${isDark ? 'text-cyber-text/50' : 'text-light-text/50'}`}>
+                    {relationshipLine(selectedTestimonial)}
+                  </p>
+                )}
               </div>
             </div>
           </div>

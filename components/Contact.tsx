@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { PERSONAL_INFO } from '../constants';
-import { Github, Linkedin, Facebook, Mail, Phone, MessageSquare, MapPin, Send, Check, Copy, ArrowUp, Sparkles } from 'lucide-react';
+import { PERSONAL_INFO } from '../data/profile';
+import { Github, Linkedin, Facebook, Mail, MessageSquare, MapPin, Send, Check, Copy, ArrowUp } from 'lucide-react';
 import { useTheme } from '../ThemeContext';
+import { EchoTitle } from './ui/EchoTitle';
 
 export const Contact: React.FC = () => {
   const { isDark } = useTheme();
@@ -44,20 +45,9 @@ export const Contact: React.FC = () => {
       <div className="container mx-auto px-6 md:px-8 max-w-7xl relative z-10">
         <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-start">
           {/* Left Column (5 Cols) */}
-          <div className="lg:col-span-5 space-y-8">
+          <div className="lg:col-span-5 space-y-8 min-w-0">
             <div>
-              <div className="relative mb-6">
-                <h2 className={`text-5xl md:text-6xl font-black font-mono tracking-tight ${
-                  isDark ? 'text-cyber-accent' : 'text-light-accent'
-                }`}>
-                  Contact
-                </h2>
-                <h2 className={`text-5xl md:text-6xl font-black font-mono absolute top-1 left-0 opacity-20 select-none pointer-events-none ${
-                  isDark ? 'text-cyber-accent' : 'text-light-accent'
-                }`}>
-                  Contact
-                </h2>
-              </div>
+              <EchoTitle title="Contact" className="mb-6" />
 
               <p className={`font-mono text-xs sm:text-sm leading-relaxed ${
                 isDark ? 'text-cyber-text' : 'text-light-text'
@@ -134,12 +124,12 @@ export const Contact: React.FC = () => {
                 <div className={`p-2 rounded-lg ${isDark ? 'bg-cyan-500/10 text-cyan-400' : 'bg-cyan-100 text-cyan-700'}`}>
                   <MapPin size={16} />
                 </div>
-                <div>
+                <div className="min-w-0">
                   <span className={`text-[10px] font-mono uppercase tracking-wider block ${isDark ? 'text-cyber-text/60' : 'text-light-text/60'}`}>
-                    Current Location
+                    Location & Availability
                   </span>
                   <span className={`text-xs font-mono font-bold ${isDark ? 'text-white' : 'text-slate-900'}`}>
-                    {PERSONAL_INFO.location} • Available Worldwide (Remote)
+                    {PERSONAL_INFO.availability}
                   </span>
                 </div>
               </div>
@@ -178,8 +168,8 @@ export const Contact: React.FC = () => {
           </div>
 
           {/* Right Column: Contact Form (7 Cols) */}
-          <div className="lg:col-span-7">
-            <div className={`p-7 sm:p-9 rounded-2xl border ${
+          <div className="lg:col-span-7 min-w-0">
+            <div className={`p-5 sm:p-9 rounded-2xl border ${
               isDark ? 'bg-cyber-card/90 border-cyber-border shadow-xl backdrop-blur-sm' : 'bg-white border-light-border shadow-md'
             }`}>
               <h3 className={`text-lg font-bold font-mono mb-2 ${isDark ? 'text-white' : 'text-light-heading'}`}>
@@ -280,8 +270,8 @@ export const Contact: React.FC = () => {
             &copy; {year} <span className={isDark ? 'text-white' : 'text-slate-900'}>{PERSONAL_INFO.name}</span>. All rights reserved.
           </div>
 
-          <div className="flex items-center gap-4">
-            <span className={isDark ? 'text-cyber-accent' : 'text-light-accent'}>
+          <div className="flex flex-wrap items-center justify-center gap-4">
+            <span className={`text-center ${isDark ? 'text-cyber-accent' : 'text-light-accent'}`}>
               Engineered with React, TypeScript & Tailwind CSS
             </span>
 
